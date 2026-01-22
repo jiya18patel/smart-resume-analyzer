@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Smart Resume Analyzer</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>📄 Smart Resume Analyzer</h1>
+    <p>Upload your resume and paste a job description to check ATS compatibility.</p>
+
+    <form method="POST" enctype="multipart/form-data">
+        <label>Upload Resume (PDF)</label>
+        <input type="file" name="resume" required>
+
+        <label>Job Description</label>
+        <textarea name="job_description" rows="8" required></textarea>
+
+        <button type="submit">Analyze Resume</button>
+    </form>
+
+    {% if score is not none %}
+    <div class="results">
+        <h2>ATS Match Score: {{ score }}%</h2>
+
+        <h3>✅ Matched Keywords</h3>
+        <p>{{ matched_keywords | join(", ") }}</p>
+
+        <h3>❌ Missing Keywords</h3>
+        <p>{{ missing_keywords | join(", ") }}</p>
+    </div>
+    {% endif %}
+</div>
+
+</body>
+</html>
